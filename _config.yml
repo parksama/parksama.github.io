@@ -2,25 +2,23 @@
 #
 
 # Site settings
-title: Spectral
+title: Mamang Home
 description: |
-  Another fine responsive  
-  site template freebie  
-  crafted by [HTML5 UP](http://html5up.net)
-owner: Your Name # or company name
+  Another NPC in this world
+owner: Fuad Yusuf P # or company name
 first_published: 2016 # if migrating another site, the year of your first publish
-email: your-email@domain.com
+email: fuadyp@gmail.com
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://yourdomain.com" # the base hostname & protocol for your site
+url: "http://terpasang.online" # the base hostname & protocol for your site
 social:
-  twitter: https://twitter.com/<username>
-  github: https://github.com/<username>
-  linkedin-square: https://linkedin.com/in/<username>
-  facebook-official: https://facebook.com/<username>
-  google-plus-square: https://plus.google.com/u/0/+<username>
+  twitter: https://twitter.com/fuad_yusuf
+  github: https://github.com/parksama
+  linkedin-square: https://linkedin.com/in/fuad-yusuf-p-17619878
+  # facebook-official: https://facebook.com/<username>
+  # google-plus-square: https://plus.google.com/u/0/+<username>
   #email: /contact/
   #flickr:
-  #instagram:
+  instagram: https://www.instagram.com/fuad_yusuf/
   #youtube-square:
   #spotify:
   #stack-overflow:
