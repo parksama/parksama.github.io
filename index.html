@@ -1,107 +1,94 @@
 ---
-layout: landing
+layout: base
+title: Home
 ---
-				<!-- Banner -->
-					<section id="banner">
-						<div class="inner">
-							<h2>{{ site.title }}</h2>
-							<p>{{ site.description | markdownify }}</p>
-							<!-- <ul class="actions">
-								<li><a href="#" class="button special">Activate</a></li>
-							</ul> -->
-						</div>
-						<a href="#one" class="more scrolly">Learn More</a>
-					</section>
 
-				<!-- One -->
-					<section id="one" class="wrapper style1 special">
-						<div class="inner">
-							<header class="major">
-								<h2>Arcu aliquet vel lobortis ata nisl<br />
-								eget augue amet aliquet nisl cep donec</h2>
-								<p>Aliquam ut ex ut augue consectetur interdum. Donec amet imperdiet eleifend<br />
-								fringilla tincidunt. Nullam dui leo Aenean mi ligula, rhoncus ullamcorper.</p>
-							</header>
-							<ul class="icons major">
-								<li><span class="icon fa-diamond major style1"><span class="label">Lorem</span></span></li>
-								<li><span class="icon fa-heart-o major style2"><span class="label">Ipsum</span></span></li>
-								<li><span class="icon fa-code major style3"><span class="label">Dolor</span></span></li>
-							</ul>
-						</div>
-					</section>
+<div class="hero mb-5">
+	<div class="container">
+		<div class="row align-items-center justify-content-between">
+			<div class="hero__text col-sm-6 text-center text-sm-start">
+				Hello I'm
+				<h1 class="d-inline-block text-warning align-middle">{{ site.name }}</h1>
+				<div class="mb-4">
+					Senior Web Developer with more than 10 years of experience with expertise developing various types of websites.
+				</div>
+				<a href="mailto:fuadyp@gmail.com" class="btn btn-lg btn-outline-warning">Contact Me</a>
+			</div>
+			<div class="hero__img col-sm-5">
+				<img src="/assets/img/photo.png" alt="{{ site.name | escape }}" class="rounded-circle">
 
-				<!-- Two -->
-					<section id="two" class="wrapper alt style2">
-						<section class="spotlight">
-							<div class="image"><img src="images/pic01.jpg" alt="" /></div><div class="content">
-								<h2>Magna primis lobortis<br />
-								sed ullamcorper</h2>
-								<p>Aliquam ut ex ut augue consectetur interdum. Donec hendrerit imperdiet. Mauris eleifend fringilla nullam aenean mi ligula.</p>
-							</div>
-						</section>
-						<section class="spotlight">
-							<div class="image"><img src="images/pic02.jpg" alt="" /></div><div class="content">
-								<h2>Tortor dolore feugiat<br />
-								elementum magna</h2>
-								<p>Aliquam ut ex ut augue consectetur interdum. Donec hendrerit imperdiet. Mauris eleifend fringilla nullam aenean mi ligula.</p>
-							</div>
-						</section>
-						<section class="spotlight">
-							<div class="image"><img src="images/pic03.jpg" alt="" /></div><div class="content">
-								<h2>Augue eleifend aliquet<br />
-								sed condimentum</h2>
-								<p>Aliquam ut ex ut augue consectetur interdum. Donec hendrerit imperdiet. Mauris eleifend fringilla nullam aenean mi ligula.</p>
-							</div>
-						</section>
-					</section>
+				<div class="hero__img__social d-flex flex-column">
+					<a href="mailto:fuadyp@gmail.com" target="_blank" title="Email">
+						<img src="/assets/img/icons/email.svg" alt="Email" class="filter-invert">
+					</a>
+					<a href="https://www.linkedin.com/in/fuad-yusuf-p-17619878/" target="_blank" title="Linkedin">
+						<img src="/assets/img/icons/linkedin.svg" alt="Linkedin" class="filter-invert">
+					</a>
+					<a href="https://github.com/parksama" target="_blank" title="Github">
+						<img src="/assets/img/icons/github.svg" alt="Github" class="filter-invert">
+					</a>
+					<a href="https://www.instagram.com/fuad_yusuf/" target="_blank" title="Instagram">
+						<img src="/assets/img/icons/instagram.svg" alt="Instagram" class="filter-invert">
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-				<!-- Three -->
-					<section id="three" class="wrapper style3 special">
-						<div class="inner">
-							<header class="major">
-								<h2>Accumsan mus tortor nunc aliquet</h2>
-								<p>Aliquam ut ex ut augue consectetur interdum. Donec amet imperdiet eleifend<br />
-								fringilla tincidunt. Nullam dui leo Aenean mi ligula, rhoncus ullamcorper.</p>
-							</header>
-							<ul class="features">
-								<li class="icon fa-paper-plane-o">
-									<h3>Arcu accumsan</h3>
-									<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-								</li>
-								<li class="icon fa-laptop">
-									<h3>Ac Augue Eget</h3>
-									<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-								</li>
-								<li class="icon fa-code">
-									<h3>Mus Scelerisque</h3>
-									<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-								</li>
-								<li class="icon fa-headphones">
-									<h3>Mauris Imperdiet</h3>
-									<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-								</li>
-								<li class="icon fa-heart-o">
-									<h3>Aenean Primis</h3>
-									<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-								</li>
-								<li class="icon fa-flag-o">
-									<h3>Tortor Ut</h3>
-									<p>Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula consequat consequat.</p>
-								</li>
-							</ul>
-						</div>
-					</section>
+<div class="about mb-5">
+	<div class="container">
+		<h2 class="title-accent">About</h2>
+		<div class="about__text">
+			<p>
+				I'm a passionate and experienced web developer with over 10 years in the IT industry.
+				I have a strong foundation in back-end development using PHP and server management, while also bringing creativity to the front-end with JavaScript.
+				Capable of creating and overseeing a wide range of websites, including company profiles, information systems, and e-commerce.
+				I would like to continue learning new stacks in order to stay current with technological advancements.
+			</p>
+			<p>
+				I'm open for <span class="text-warning">part-time jobs</span>, <span class="text-warning">full-time opportunities</span>, or <span class="text-warning">just to chat</span>.
+			</p>
+		</div>
+	</div>
+</div>
 
-				<!-- CTA -->
-					<section id="cta" class="wrapper style4">
-						<div class="inner">
-							<header>
-								<h2>Arcue ut vel commodo</h2>
-								<p>Aliquam ut ex ut augue consectetur interdum endrerit imperdiet amet eleifend fringilla.</p>
-							</header>
-							<ul class="actions vertical">
-								<li><a href="#" class="button fit special">Activate</a></li>
-								<li><a href="#" class="button fit">Learn More</a></li>
-							</ul>
+<div class="skill mb-5">
+	<div class="container">
+		<h2 class="title-accent mb-4">Skills</h2>
+		<div class="row g-3 g-md-4 justify-content-center">
+			{%- for item in site.data.skills -%}
+				<div class="col-6 col-md-4 col-lg-3 skill__item">
+					<div class="p-4 p-lg-5 border border-secondary rounded-5 h-100 d-flex flex-column">
+						<div class="img-square mb-3">
+							<img src="/assets/img/icons/{{ item.icon }}" alt="{{ item.label | escape }}" loading="lazy">
 						</div>
-					</section>
+						<div class="skill__item__label text-center mb-0 mt-auto">
+							{{ item.label }}
+						</div>
+					</div>
+				</div>
+			{%- endfor -%}
+		</div>
+	</div>
+</div>
+
+<div class="skill mb-5">
+	<div class="container">
+		<h2 class="title-accent mb-4">Familiar with</h2>
+		<div class="row g-3 g-md-4 justify-content-center">
+			{%- for item in site.data.familiar -%}
+				<div class="col-6 col-md-4 col-lg-3 skill__item">
+					<div class="p-4 p-lg-5 border border-secondary rounded-5 h-100 d-flex flex-column">
+						<div class="img-square mb-3">
+							<img src="/assets/img/icons/{{ item.icon }}" alt="{{ item.label | escape }}" loading="lazy">
+						</div>
+						<div class="skill__item__label text-center mb-0 mt-auto">
+							{{ item.label }}
+						</div>
+					</div>
+				</div>
+			{%- endfor -%}
+		</div>
+	</div>
+</div>

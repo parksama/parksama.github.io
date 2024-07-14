@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+
+	<title>
+		{{ page.title | default: 'Home' }} | {{ site.name }}
+	</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="bg-dark text-bg-dark">
+	{% include header.liquid %}
+
+	{{ content }}
+
+	{% include footer.liquid %}
+</body>
+</html>

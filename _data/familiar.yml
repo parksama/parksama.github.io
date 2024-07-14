@@ -1,0 +1,27 @@
+- label: Sass
+  icon: sass.svg
+
+- label: Babel
+  icon: babel.svg
+
+- label: Webpack
+  icon: webpack.svg
+
+- label: Vite
+  icon: vite-js.svg
+
+- label: Linux Server Management
+  icon: ubuntu.svg
+
+- label: cPanel
+  icon: cpanel.svg
+
+- label: aaPanel
+  icon: aapanel.png
+
+- label: DirectAdmin
+  icon: directadmin.svg
+
+- label: Plesk
+  icon: plesk.svg
+

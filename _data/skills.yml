@@ -1,0 +1,41 @@
+- label: HTML
+  icon: html.svg
+
+- label: CSS
+  icon: css.svg
+
+- label: JavaScript
+  icon: javascript.svg
+
+- label: React
+  icon: react-js.svg
+
+- label: Vue
+  icon: vue-js.svg
+
+- label: WordPress
+  icon: wordpress.svg
+
+- label: WooCommerce
+  icon: woocommerce.svg
+
+- label: Elementor
+  icon: elementor.svg
+
+- label: PHP
+  icon: php.svg
+
+- label: MySQL
+  icon: mysql.svg
+
+- label: Laravel
+  icon: laravel.svg
+
+- label: CodeIgniter
+  icon: codeigniter.svg
+
+- label: Shopify
+  icon: shopify.svg
+
+- label: Page Speed Optimization
+  icon: pagespeed.svg

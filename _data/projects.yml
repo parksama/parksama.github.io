@@ -1,0 +1,24 @@
+- name: CD Power Website
+  url: https://www.cdpower.com.au/
+  period: MEI 2023 - NOW
+  desc: E-commerce website selling generator related items. Built with WordPress and WooCommerce.
+
+- name: Manchester Warehouse Website
+  url: https://www.manchesterwarehouse.com.au/
+  period: JANUARI 2020 - NOW
+  desc: Build and manage Shopify based e-commerce websites.
+
+- name: Gleeson Real Estate Website
+  url: https://www.gleesonre.com.au/
+  period: FEBRUARI 2023 - MEI 2023
+  desc: Real estate directory website built with WordPress and Elementor. The item list is synchronized via the REAXML API from an external data source.
+
+- name: Banana Home Website
+  url: https://www.bananahome.com.au/
+  period: MEI 2022 - NOVEMBER 2022
+  desc: Shopify e-commerce website specializing in selling sofas and related furniture. Here I optimize performance and improve user experience with intuitive features.
+
+- name: The Event Bible Website
+  url: https://theeventbible.com.au/
+  period: DESEMBER 2020 - SEPTEMBER 2021
+  desc: Wedding directory website is in Australia, built with WordPress. This website allows vendors and venue owners to promote their businesses.
