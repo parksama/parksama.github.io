@@ -1,0 +1,293 @@
+---
+layout: base
+title: Projects
+---
+<style>
+	.paster {
+		width: 100%;
+		margin: 2rem auto;
+		position: relative;
+		text-align: center;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	.preview {
+		position: relative;
+		display: inline-block;
+		width: 500px;
+		border: 2px dashed #fff;
+		border-radius: 10px;
+		overflow: hidden;
+		margin-bottom: 1rem;
+	}
+
+	#destination {
+		max-width: 100%;
+		width: auto;
+		height: auto;
+	}
+
+	#destination:not([src]) {
+		width: 100%;
+		aspect-ratio: 1 / 1;
+	}
+
+	.preview:has(#destination[src]) {
+		border: unset;
+		width: auto;
+		box-shadow: 4px 4px 10px 0px rgb(0 0 0 / 25%);
+	}
+
+	/* #destination {
+		background-color: #fff;
+		max-width: 100%;
+		height: auto;
+		object-fit: contain;
+		box-shadow: 4px 4px 10px 0px rgb(0 0 0 / 25%);
+		border-radius: 10px;
+		margin-bottom: 1rem;
+		border: 2px solid #555;
+	}
+
+	#destination:not([src]) {
+		aspect-ratio: 1 / 1;
+		width: 500px;
+	} */
+
+	#label {
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 100%;
+	}
+
+	#destination:not([src])+#label {
+		display: block;
+	}
+
+	.error {
+		display: inline-block;
+		color: #fff;
+		margin-top: 1em;
+		background-color: #E91E63;
+		padding: 0.5em 1em;
+		border-radius: 5px;
+	}
+
+	.error:empty {
+		display: none;
+	}
+
+	.paster {
+		display: none;
+	}
+
+	.editor {
+		display: none;
+		height: 100vh;
+	}
+
+	.imageclip[data-display="paster"] .paster {
+		display: block;
+	}
+
+	.imageclip[data-display="editor"] .editor {
+		display: block;
+	}
+
+	#editor_container {
+		height: 100%;
+	}
+</style>
+
+<script src="https://scaleflex.cloudimg.io/v7/plugins/filerobot-image-editor/latest/filerobot-image-editor.min.js"
+	crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+
+<div class="container-fluid imageclip my-5" data-display="paster">
+	<div class="paster">
+		<div class="preview">
+			<img id="destination" />
+			<span id="label">
+				ctrl+v <br>
+				or <br>
+				click here to paste</span>
+		</div>
+		<div>
+			<button id="btnpaste">Paste Image</button>
+			<button id="btnedit">Edit Image</button>
+		</div>
+		<div class="error"></div>
+	</div>
+
+	<div class="editor">
+		<div id="editor_container"></div>
+	</div>
+</div>
+
+<script>
+	const imageclip = document.querySelector(".imageclip");
+	const destination = document.querySelector("#destination");
+	const preview = document.querySelector(".preview");
+	const btnpaste = document.querySelector("#btnpaste");
+	const btnedit = document.querySelector("#btnedit");
+	const errordiv = document.querySelector(".error");
+
+	preview.addEventListener("click", pasteImage);
+	btnpaste.addEventListener("click", pasteImage);
+
+	destination.addEventListener('load', event => {
+		console.log(destination.naturalWidth, destination.naturalHeight);
+	});
+
+	document.addEventListener("paste", pasteImage);
+
+	var lasturl = '';
+
+	async function pasteImage() {
+		errordiv.innerHTML = '';
+
+		try {
+			const permission = await navigator.permissions.query({
+				name: "clipboard-read",
+			});
+			if (permission.state === "denied") {
+				throw new Error("Not allowed to read clipboard.");
+			}
+			const clipboardContents = await navigator.clipboard.read();
+			console.log({ clipboardContents });
+
+			for (const item of clipboardContents) {
+				if (!item.types.includes("image/png")) {
+					throw new Error("Clipboard contains non-image data.");
+				}
+
+				console.log(item);
+				item.types.forEach(async type => {
+					var data = await item.getType(type);
+					if (type == "text/html") {
+						var text = await data.text();
+						console.log(text);
+					}
+				});
+
+				const blob = await item.getType("image/png");
+				destination.src = URL.createObjectURL(blob);
+				lasturl = destination.src;
+			}
+		} catch (error) {
+			console.error(error.message);
+			errordiv.innerHTML = error.message;
+		}
+	}
+
+	btnedit.addEventListener('click', event => {
+		if (lasturl) {
+			editImge(lasturl);
+		}
+	});
+
+	function editImge(url) {
+		imageclip.setAttribute('data-display', 'editor');
+
+		// var FilerobotImageEditor = window.FilerobotImageEditor;
+		const { TABS, TOOLS } = FilerobotImageEditor;
+		const config = {
+			source: url,
+			onSave: (editedImageObject, designState) => {
+				console.log('saved', editedImageObject, designState);
+				editedImageObject.imageCanvas.toBlob(blob => {
+					var url = URL.createObjectURL(blob);
+					destination.src = url;
+					lasturl = url;
+
+					imageclip.setAttribute('data-display', 'paster');
+					window.imageEdior.terminate();
+				});
+			},
+			onBeforeSave: (savedImageData) => {
+				console.log('before save', savedImageData);
+				return false;
+			},
+			theme: {
+				// palette: {
+				// 	'bg-secondary': '#222222',
+				// 	'bg-primary': '#212529',
+				// 	'bg-primary-active': '#3f474f',
+				// 	// 'accent-primary': '....',
+				// 	// 'accent-primary-active': '....',
+				// 	// 'icons-primary': '....',
+				// 	// 'icons-secondary': '....',
+				// 	// 'borders-secondary': '....',
+				// 	// 'borders-primary': '....',
+				// 	// 'borders-strong': '....',
+				// 	// 'light-shadow': '....',
+				// 	// 'warning': '....',
+				// },
+			},
+			annotationsCommon: {
+				fill: '#000000',
+				stroke: '#ffffff',
+				strokeWidth: 1,
+				shadowOffsetX: 0,
+				shadowOffsetY: 0,
+				shadowBlur: 0,
+				shadowColor: '#000000',
+				shadowOpacity: 1,
+				opacity: 1,
+			},
+			Text: {
+				text: 'Lorem ipsum',
+				fontSize: 40,
+				fill: '#ffffff',
+				stroke: '#6495ed',
+			},
+			Rotate: { angle: 90, componentType: 'slider' },
+			// translations: {
+			// 	profile: 'Profile',
+			// 	coverPhoto: 'Cover photo',
+			// 	facebook: 'Facebook',
+			// 	socialMedia: 'Social Media',
+			// 	fbProfileSize: '180x180px',
+			// 	fbCoverPhotoSize: '820x312px',
+			// },
+			Crop: {
+				presetsItems: [
+					{
+						titleKey: 'square',
+						descriptionKey: '1:1',
+						ratio: 1 / 1,
+						// icon: CropClassicTv, // optional, CropClassicTv is a React Function component. Possible (React Function component, string or HTML Element)
+					},
+				],
+			},
+			Pen: {
+				stroke: '#6495ed',
+				strokeWidth: 1,
+				tension: 0.5,
+				lineCap: 'round',
+				selectAnnotationAfterDrawing: true,
+			},
+			tabsIds: [TABS.ADJUST, TABS.ANNOTATE], // or ['Adjust', 'Annotate', 'Watermark']
+			defaultTabId: TABS.ADJUST, // or 'Annotate'
+			defaultToolId: TOOLS.CROP, // or 'Text'
+		};
+
+		// Assuming we have a div with id="editor_container"
+		window.imageEdior = new FilerobotImageEditor(
+			document.querySelector('#editor_container'),
+			config,
+		);
+
+		imageEdior.render({
+			onClose: (closingReason) => {
+				imageclip.setAttribute('data-display', 'paster');
+				console.log('Closing reason', closingReason);
+				imageEdior.terminate();
+			},
+		});
+	}
+
+</script>

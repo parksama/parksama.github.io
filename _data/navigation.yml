@@ -3,3 +3,9 @@
 
 - label: Projects
   url: /projects
+
+- label: Tools
+  url: #
+  subs:
+  - label: Clipboard Image Editor
+    url: /tools/imageclip

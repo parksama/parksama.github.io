@@ -13,13 +13,36 @@
 
             <ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0">
                 {%- for item in site.data.navigation -%}
-					<a href="{{ item.url }}" class="nav-link px-2 {{- ' ' -}} {%- if cur_url == item.url -%}
-							text-warning
-						{%- else -%}
-							text-white
-						{%- endif -%}">
-						{{ item.label }}
-					</a>
+                    {%- if item.subs -%}
+                        <li class="nav-item dropdown">
+                            <a href="{{ item.url }}" class="nav-link dropdown-toggle px-2 {{- ' ' -}} {%- if cur_url == item.url -%}
+                                    text-warning
+                                {%- else -%}
+                                    text-white
+                                {%- endif -%}"
+                                data-bs-toggle="dropdown"
+                            >
+                                {{ item.label }}
+                            </a>
+
+                            <div class="dropdown-menu">
+                                {%- for sub in item.subs -%}
+                                    <a href="{{ sub.url }}" class="dropdown-item">{{ sub.label }}</a>
+                                {%- endfor -%}
+                            </div>
+                        </li>
+                    {%- else -%}
+                        <li class="nav-item">
+                            <a href="{{ item.url }}" class="nav-link px-2 {{- ' ' -}} {%- if cur_url == item.url -%}
+                                    text-warning
+                                {%- else -%}
+                                    text-white
+                                {%- endif -%}"
+                            >
+                                {{ item.label }}
+                            </a>
+                        </li>
+                    {%- endif -%}
                 {%- endfor -%}
             </ul>
         </div>
