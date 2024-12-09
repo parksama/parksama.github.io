@@ -116,8 +116,8 @@ title: Projects
 				click here to paste</span>
 		</div>
 		<div>
-			<button id="btnpaste">Paste Image</button>
-			<button id="btnedit">Edit Image</button>
+			<button id="btnpaste" class="btn btn-outline-warning mx-1">Paste Image</button>
+			<button id="btnedit" class="btn btn-outline-warning mx-1 d-none">Edit Image</button>
 		</div>
 		<div class="error"></div>
 	</div>
@@ -176,6 +176,8 @@ title: Projects
 				const blob = await item.getType("image/png");
 				destination.src = URL.createObjectURL(blob);
 				lasturl = destination.src;
+
+				btnedit.classList.remove("d-none");
 			}
 		} catch (error) {
 			console.error(error.message);
