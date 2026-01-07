@@ -7,5 +7,10 @@
 - label: Tools
   url: #
   subs:
+  - label: Clipboard Info
+    url: /tools/clipboardinfo
   - label: Clipboard Image Editor
     url: /tools/imageclip
+  - label: Photo Date Labeler
+    url: https://parksama.github.io/photo-date-labeler/
+    external: true

@@ -1,0 +1,158 @@
+---
+layout: base
+title: Clipboard Info
+---
+
+<style>
+    .clipinfo__item+.clipinfo__item {
+        margin-top: 32px;
+    }
+
+    .clipinfo__error {
+		color: #fff;
+		margin-top: 1em;
+		background-color: #E91E63;
+		padding: 0.5em 1em;
+		border-radius: 5px;
+	}
+
+	.clipinfo__error:empty {
+		display: none;
+	}
+</style>
+
+<div class="container clipinfo my-5">
+    <h1 class="mb-5">{{ page.title }}</h1>
+
+    <div class="clipinfo__start text-center py-5">
+        <h2 class="mb-4">
+            Press <code>CTRL + V</code> or click
+        </h2>
+        <button type="button" class="btn btn-lg btn-outline-warning clipinfo__start__paste">Paste</button>
+    </div>
+
+    <div class="clipinfo__item d-none clipinfo__item--text">
+        <h2>Text</h2>
+        <textarea class="clipinfo__item__value form-control" rows="5"></textarea>
+    </div>
+
+    <div class="clipinfo__item d-none clipinfo__item--html">
+        <h2>HTML</h2>
+        <ul class="nav nav-tabs" id="myTab" role="tablist" style="--bs-nav-link-color: #fff;">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="source-tab" data-bs-toggle="tab" data-bs-target="#source-tab-pane"
+                    type="button" role="tab" aria-controls="source-tab-pane" aria-selected="true">Source Code</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="preview-tab" data-bs-toggle="tab" data-bs-target="#preview-tab-pane"
+                    type="button" role="tab" aria-controls="preview-tab-pane" aria-selected="false">Preview</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="source-tab-pane" role="tabpanel" aria-labelledby="source-tab"
+                tabindex="0">
+                <textarea class="clipinfo__item__value form-control rounded-0" rows="5"></textarea>
+            </div>
+            <div class="tab-pane fade" id="preview-tab-pane" role="tabpanel" aria-labelledby="preview-tab" tabindex="0">
+                <iframe srcdoc="" frameborder="0" class="clipinfo__item__preview w-100"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="clipinfo__item d-none clipinfo__item--image">
+        <h2>Image</h2>
+        <img class="clipinfo__item__value">
+    </div>
+
+    <div class="clipinfo__error my-5"></div>
+</div>
+
+<script>
+    const clipinfo__error = document.querySelector(".clipinfo__error");
+    const html_preview = document.querySelector(".clipinfo__item--html .clipinfo__item__preview");
+    const html_preview_btn = document.querySelector(".clipinfo__item--html #preview-tab");
+
+    html_preview.addEventListener('init', event => {
+        var css =  `<style>
+            body {
+                margin: 0;
+                background-color: #fff;
+            }
+            img {
+                max-width: 100%;
+            }
+        </style>`;
+
+        event.target.contentDocument.head.innerHTML += css;
+
+        event.target.style.height = event.target.contentDocument.body.parentElement.offsetHeight + 0 + 'px';
+    });
+
+    html_preview_btn.addEventListener('shown.bs.tab', event => {
+        html_preview.dispatchEvent(new CustomEvent('init'));
+    });
+
+    async function paste() {
+        clipinfo__error.innerHTML = '';
+        var unhandled = [];
+
+        document.querySelectorAll(".clipinfo__item").forEach(item => {
+            item.classList.add("d-none");
+        });
+
+        try {
+            const permission = await navigator.permissions.query({
+                name: "clipboard-read",
+            });
+
+            if (permission.state === "denied") {
+                throw new Error("Please allow clipboard access in your browser settings.");
+            }
+
+            const clipboardContents = await navigator.clipboard.read();
+            console.log({ clipboardContents });
+
+            for (const item of clipboardContents) {
+                item.types.forEach(async type => {
+                    var blob = await item.getType(type);
+
+                    switch (type) {
+                        case "text/plain":
+                            var text = await blob.text();
+                            console.log({ text });
+                            document.querySelector(".clipinfo__item--text .clipinfo__item__value").value = text;
+                            document.querySelector(".clipinfo__item--text").classList.remove("d-none");
+                            break;
+                        case "text/html":
+                            var html = await blob.text();
+                            console.log({ html });
+                            document.querySelector(".clipinfo__item--html .clipinfo__item__value").value = html;
+                            html_preview.srcdoc = html;
+                            html_preview.dispatchEvent(new CustomEvent('init'));
+                            document.querySelector(".clipinfo__item--html").classList.remove("d-none");
+                            break;
+                        case "image/png":
+                            console.log({ blob });
+                            document.querySelector(".clipinfo__item--image .clipinfo__item__value").src = URL.createObjectURL(blob);
+                            document.querySelector(".clipinfo__item--image").classList.remove("d-none");
+                            break;
+                        default:
+                            console.log({ type });
+                            unhandled.push(type);
+                            break;
+                    }
+                });
+            }
+        } catch (error) {
+            console.error(error.message);
+            clipinfo__error.innerHTML = error.message;
+        }
+
+        if (unhandled.length) {
+            clipinfo__error.innerHTML = 'Unhandled type: ' + unhandled.join(', ') + '.';
+        }
+    }
+
+    document.addEventListener("paste", paste);
+    document.querySelector('.clipinfo__start__paste').addEventListener('click', paste);
+</script>

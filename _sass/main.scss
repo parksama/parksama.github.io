@@ -116,6 +116,16 @@ img {
 	}
 }
 
+header {
+	.dropdown-item {
+		&:has(svg) {
+			display: flex;
+			align-items: center;
+			gap: 0.25em;
+		}
+	}
+}
+
 .footer {
 	&__social {
 		display: flex;
